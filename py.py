@@ -3,7 +3,12 @@ pupils = open("pupils.txt", "r")
 pupilslines = pupils.readlines()
 hobbies = open("hobbies.txt", "r")
 hobbieslines = hobbies.readlines()
-list = csv.writer(open("list.csv", "wb"))
-list.writerow(["Имя","Хобби"])
-for i in range (0,len(pupils)):
- list.writerow([pupilslines[i],hobbieslines[i]])
+with open('names.csv', 'w') as csvfile:
+    fieldnames = ['Name', 'Hobby']
+    
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    
+    writer.writeheader()
+    for i in range (0,len(pupilslines)):
+        writer.writerow({'Name': pupilslines[i] , 'Hobby':hobbieslines[i]})
+
